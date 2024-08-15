@@ -1,101 +1,139 @@
-import * as React from 'react';
-import { useColorScheme } from '@mui/joy/styles';
-import Sheet from '@mui/joy/Sheet';
-import CssBaseline from '@mui/joy/CssBaseline';
-import Typography from '@mui/joy/Typography';
-import FormControl from '@mui/joy/FormControl';
-import FormLabel from '@mui/joy/FormLabel';
-import Input from '@mui/joy/Input';
-import Button from '@mui/joy/Button';
-import Link from '@mui/joy/Link';
+import React from 'react'
+import logo from "../asset/logo.svg"
+import { useState } from 'react';
+import { AiFillGoogleCircle } from "react-icons/ai";
+import { FaFacebook } from "react-icons/fa6";
+import { Link, useNavigate } from 'react-router-dom';
 
-function ModeToggle() {
-  const { mode, setMode } = useColorScheme();
-  const [mounted, setMounted] = React.useState(false);
+const Login = () => {
 
-  // necessary for server-side rendering
-  // because mode is undefined on the server
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-  
-  if (!mounted) {
-    return <Button variant="soft">Change mode</Button>;
-  }
+  const [formData, setFormData] = useState({
+    email: "",
+    password: ""
+  });
+
+
+  const [errors, setErrors] = useState({ email: '', password: '' });
+
+
+  const navigate = useNavigate();
+
+  const changeHandler = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: '' });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let newErrors = {};
+    if (!formData.email) {
+      newErrors.email = 'Email is required';
+    }
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+    }
+    setErrors(newErrors);
+
+    if (!newErrors.email && !newErrors.password) {
+      // Handle form submission
+
+
+      console.log('Form submission');
+      console.log(formData)
+
+      navigate("/")
+    }
+  };
+
+
 
   return (
-    <Button
-      variant="soft"
-      onClick={() => {
-        setMode(mode === 'light' ? 'dark' : 'light');
-      }}
-    >
-      {mode === 'light' ? 'Turn dark' : 'Turn light'}
-    </Button>
-  );
-}
+    <div className='absolute top-24 left-[35%] items-center flex flex-col justify-center bg-gray-500 w-[600px] h-[600px] rounded-md'>
+      <div className='flex flex-col items-center justify-center'>
+        <img src={logo} alt='logo' />
 
-export default function Login() {
-  return (
-    <main 
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',  // Full viewport height
-        width: '100vw',   // Full viewport width
-        position: 'relative', // To allow absolute positioning of elements
-      }}
-    >
-      <ModeToggle />
-      <CssBaseline />
-      <Sheet
-        sx={{
-          width: 300,
-          py: 3, // padding top & bottom
-          px: 2, // padding left & right
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 2,
-          borderRadius: 'sm',
-          boxShadow: 'md',
-          position: 'relative', // Ensure it's positioned within its parent container
-        }}
-        variant="outlined"
-      >
-        <div>
-          <Typography level="h4" component="h1">
-            <b>Welcome!</b>
-          </Typography>
-          <Typography level="body-sm">Sign in to continue.</Typography>
+        <p>Welcome To Bazaar</p>
+      </div>
+
+      <form className=" w-[80%]" onSubmit={handleSubmit}>
+        <div className="flex flex-col gap-2">
+
+          <label htmlFor='email' className="text-lg text-cyan-200">Email or Phone Number </label>
+
+
+          <input
+            type='email'
+            name='email'
+            placeholder='example@example.com'
+            value={formData.email}
+            className={`bg-gray-400 py-1 rounded-sm mb-1 border ${errors.email ? 'border-red-600' : 'border-gray-300'
+              } hover:border-red-700 focus:border-red-600`}
+            id='Email'
+            onChange={changeHandler}
+            required
+          />
+          {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
+
+
         </div>
-        <FormControl>
-          <FormLabel>Email</FormLabel>
-          <Input
-            // html input attribute
-            name="email"
-            type="email"
-            placeholder="johndoe@email.com"
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor='email' className="text-lg text-cyan-200">Email or Phone Number </label>
+          <input
+            type='password'
+            name='password'
+            placeholder='Enter your password'
+            value={formData.password}
+            className={`bg-gray-400 py-1 rounded-sm mb-1 border ${errors.password ? 'border-red-600' : 'border-gray-300'
+              } hover:border-red-700 focus:border-red-600`}
+            id='Password'
+            onChange={changeHandler}
+            required
           />
-        </FormControl>
-        <FormControl>
-          <FormLabel>Password</FormLabel>
-          <Input
-            // html input attribute
-            name="password"
-            type="password"
-            placeholder="password"
-          />
-        </FormControl>
-        <Button sx={{ mt: 1 /* margin top */ }}>Log in</Button>
-        <Typography
-          endDecorator={<Link href="/sign-up">Sign up</Link>}
-          fontSize="sm"
-          sx={{ alignSelf: 'center' }}
-        >
-          Don&apos;t have an account?
-        </Typography>
-      </Sheet>
-    </main>
-  );
+          {errors.password && <p className="text-red-600 text-sm mt-1">{errors.password}</p>}
+        </div>
+
+        <button type='submit' className="text-white py-2 px-4 rounded-sm w-full my-4 bg-red-700">
+          Login
+        </button>
+      </form>
+
+      <div className='text-yellow-300 text-2xl p-4'>
+        or
+      </div>
+
+
+      <div className='w-[80%]'>
+        <button className="text-white py-2 px-4 rounded-sm w-full my-4 bg-blue-600">
+          <a href='/' className='flex items-center justify-center'>
+            <p className='flex items-center justify-center space-x-2'>
+              <AiFillGoogleCircle />
+              <span>Continue With Google</span>
+            </p>
+          </a>
+        </button>
+
+        <button className="text-white py-2 px-4 rounded-sm w-full my-4 bg-blue-950">
+          <a href='/' className='flex items-center justify-center'>
+            <p className='flex items-center justify-center space-x-2'>
+              <FaFacebook />
+              <span>Continue With Facebook</span>
+            </p>
+          </a>
+        </button>
+
+        <div className='flex items-center justify-center text-xl gap-2 text-cyan-400'>
+          Don't have account?
+          <Link to="/signup" className=' text-slate-400 underline'>Register</Link>
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+  )
 }
+
+export default Login

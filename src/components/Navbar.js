@@ -1,17 +1,10 @@
-import React, { useState } from 'react'
 import logo from "../asset/logo.svg"
 import { BsSearch } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { CiShoppingCart } from "react-icons/ci";
-import Login from './Login';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-
-    const [showLogin, setShowLogin] = useState(false);
-
-    function handleLogin() {
-        setShowLogin(true);
-    }
 
     return (
         <div className='fixed top-0 left-0 w-full bg-slate-100 z-50 flex justify-between  mx-auto py-4 px-10 items-center shadow-md shadow-slate-200'>
@@ -58,14 +51,11 @@ const Navbar = () => {
 
 
             <div className='flex gap-3 justify-center items-center'>
-                <button onClick={handleLogin} className=' relative'>
+                <Link to="/login" className=' relative'>
                     <div className="rounded-full px-1 py-1 hover:bg-gray-400 transition-all duration-300">
                         <CgProfile className=" text-zinc-900 text-3xl" />
                     </div>
-
-                    {showLogin && <Login />}
-
-                </button>
+                </Link>
 
 
                 <button className="rounded-full px-1 py-1 hover:bg-gray-400 transition-all duration-300">

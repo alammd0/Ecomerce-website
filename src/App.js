@@ -11,15 +11,13 @@ import Womenfaishon from "./components/pages/Fashion/Womenfaishon";
 import Bad from "./components/pages/Furniture/Bad";
 import Home from "./components/pages/Home";
 import Bakery from "./components/pages/Bakery";
-import { CssVarsProvider } from "@mui/joy";
+import Login from "./components/Login";
 
 
 
 function App() {
   return (
-
-    <CssVarsProvider>
-      <div>
+      <div className=" relative">
         <Navbar />
 
         <Sidebar />
@@ -29,6 +27,8 @@ function App() {
 
 
             <Route path="/" element={<Home />} />
+
+            <Route path="/login" element={<Login />} />
 
             <Route path="/categries/hand-wash" element={<Handwash />} />
             <Route path="/categries/face-wash" element={<FaceWash />} />
@@ -50,7 +50,6 @@ function App() {
           </Routes>
         </div>
       </div>
-    </CssVarsProvider>
 
   );
 }
