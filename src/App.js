@@ -12,44 +12,47 @@ import Bad from "./components/pages/Furniture/Bad";
 import Home from "./components/pages/Home";
 import Bakery from "./components/pages/Bakery";
 import Login from "./components/Login";
+import Signup from "./components/pages/Signup";
 
 
 
 function App() {
   return (
-      <div className=" relative">
-        <Navbar />
+    <div className=" relative">
+      <Navbar />
 
-        <Sidebar />
+      <Sidebar />
 
-        <div>
-          <Routes>
-
-
-            <Route path="/" element={<Home />} />
-
-            <Route path="/login" element={<Login />} />
-
-            <Route path="/categries/hand-wash" element={<Handwash />} />
-            <Route path="/categries/face-wash" element={<FaceWash />} />
-            <Route path="/categries/tissue-wipes" element={<Tissuewipes />} />
+      <div>
+        <Routes>
 
 
-            <Route path="/categries/mobile" element={<Mobile />} />
-            <Route path="/categries/laptops" element={<Laptops />} />
+          <Route path="/" element={<Home />} />
+
+          <Route path="/login" element={<Login />} />
+
+          <Route path="signup" element={<Signup />} />
+
+          <Route path="/categries/hand-wash" element={<Handwash />} />
+          <Route path="/categries/face-wash" element={<FaceWash />} />
+          <Route path="/categries/tissue-wipes" element={<Tissuewipes />} />
 
 
-            <Route path="/categries/bad" element={<Bad />} />
-
-            <Route path="/categries/men-faishon" element={<Menfaishon />} />
-            <Route path="/categries/women-faishon" element={<Womenfaishon />} />
+          <Route path="/categries/mobile" element={<Mobile />} />
+          <Route path="/categries/laptops" element={<Laptops />} />
 
 
-            <Route path="/categries/bakery" element={<Bakery />} />
+          <Route path="/categries/bad" element={<Bad />} />
 
-          </Routes>
-        </div>
+          <Route path="/categries/men-faishon" element={<Menfaishon />} />
+          <Route path="/categries/women-faishon" element={<Womenfaishon />} />
+
+
+          <Route path="/categries/bakery" element={<Bakery />} />
+
+        </Routes>
       </div>
+    </div>
 
   );
 }
