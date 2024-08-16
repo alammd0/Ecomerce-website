@@ -29,7 +29,7 @@ const Sidebar = () => {
     return (
 
         <div>
-            <div className="w-64 h-screen flex flex-col gap-[295px] fixed top-[5.25rem] bg-slate-200">
+            <div className=" w-72 h-screen flex flex-col gap-[295px] fixed top-[5.25rem] bg-slate-200">
 
                 <ul className="p-4">
 

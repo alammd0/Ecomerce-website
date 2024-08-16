@@ -18,7 +18,7 @@ import Signup from "./components/pages/Signup";
 
 function App() {
   return (
-    <div className=" relative">
+    <div className="bg-slate-200">
       <Navbar />
 
       <Sidebar />
