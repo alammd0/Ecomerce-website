@@ -1,10 +1,21 @@
-import logo from "../asset/logo.svg"
+import logo from "../asset/logo.svg";
 import { BsSearch } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { CiShoppingCart } from "react-icons/ci";
-import { Link } from 'react-router-dom';
+import Login from "./Login";
+import Signup from "./pages/Signup"; // Assuming you have a SignUp component
+import { useState } from "react";
 
 const Navbar = () => {
+    const [visibleComponent, setVisibleComponent] = useState(null);
+
+    const toggleLoginVisibility = () => {
+        setVisibleComponent(visibleComponent === 'login' ? null : 'login');
+    };
+
+    const toggleSignUpVisibility = () => {
+        setVisibleComponent(visibleComponent === 'signup' ? null : 'signup');
+    };
 
     return (
         <div className='fixed top-0 left-0 w-full bg-slate-100 z-50 flex justify-between  mx-auto py-4 px-10 items-center shadow-md shadow-slate-200'>
@@ -49,22 +60,38 @@ const Navbar = () => {
 
             </div>
 
-
             <div className='flex gap-3 justify-center items-center'>
-                <Link to="/login" className=' relative'>
-                    <div className="rounded-full px-1 py-1 hover:bg-gray-400 transition-all duration-300">
-                        <CgProfile className=" text-zinc-900 text-3xl" />
+                <div>
+                    <div
+                        className="rounded-full px-1 py-1 hover:bg-gray-400 transition-all duration-300 cursor-pointer"
+                        onClick={toggleLoginVisibility}
+                    >
+                        <CgProfile className="text-zinc-900 text-3xl" />
                     </div>
-                </Link>
 
+                    {visibleComponent === 'login' && (
+                        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                        <div className="bg-white p-6 rounded-lg shadow-lg">
+                                <Login toggleSignUpVisibility={toggleSignUpVisibility} />
+                            </div>
+                        </div>
+                    )}
+
+                    {visibleComponent === 'signup' && (
+                        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                            <div className="bg-white p-6 rounded-lg shadow-lg">
+                                <Signup toggleLoginVisibility = {toggleLoginVisibility}/>
+                            </div>
+                        </div>
+                    )}
+                </div>
 
                 <button className="rounded-full px-1 py-1 hover:bg-gray-400 transition-all duration-300">
-
                     <CiShoppingCart className=" text-zinc-900 text-3xl" />
                 </button>
             </div>
         </div>
-    )
+    );
 }
 
-export default Navbar
+export default Navbar;

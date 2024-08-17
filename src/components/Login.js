@@ -3,9 +3,9 @@ import logo from "../asset/logo.svg"
 import { useState } from 'react';
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { FaFacebook } from "react-icons/fa6";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({toggleSignUpVisibility}) => {
 
   const [formData, setFormData] = useState({
     email: "",
@@ -23,9 +23,10 @@ const Login = () => {
     setErrors({ ...errors, [e.target.name]: '' });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let newErrors = {};
+    
     if (!formData.email) {
       newErrors.email = 'Email is required';
     }
@@ -33,17 +34,24 @@ const Login = () => {
       newErrors.password = 'Password is required';
     }
     setErrors(newErrors);
-
+  
     if (!newErrors.email && !newErrors.password) {
-      // Handle form submission
+      try {
+        // Assuming there's an async login function
+        // await loginFunction(formData);
+  
+        console.log('Form submission');
+        console.log(formData);
 
-
-      console.log('Form submission');
-      console.log(formData)
-
-      navigate("/")
+        console.log('Navigating to home');
+        navigate("/", { replace: true });
+      } catch (error) {
+        // Handle any errors during the login process
+        console.error("Login failed:", error);
+      }
     }
   };
+  
 
 
 
@@ -78,7 +86,7 @@ const Login = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor='email' className="text-lg text-cyan-200">Email or Phone Number </label>
+          <label htmlFor='email' className="text-lg text-cyan-200">Password </label>
           <input
             type='password'
             name='password'
@@ -124,7 +132,11 @@ const Login = () => {
 
         <div className='flex items-center justify-center text-xl gap-2 text-cyan-400'>
           Don't have account?
-          <Link to="/signup" className=' text-slate-400 underline'>Register</Link>
+          <button className=' underline text-lg'
+            onClick={toggleSignUpVisibility}
+          >
+            SignUp
+          </button>
         </div>
 
 

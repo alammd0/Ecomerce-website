@@ -4,9 +4,8 @@ import { useNavigate } from 'react-router';
 import logo from "../../asset/logo.svg"
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { FaFacebook } from "react-icons/fa6";
-import { Link } from 'react-router-dom';
 
-const Signup = () => {
+const Signup = ({ toggleLoginVisibility }) => {
 
     const [formData, setFormData] = useState({
         firstName: "",
@@ -157,8 +156,15 @@ const Signup = () => {
                 </button>
 
                 <div className='flex items-center justify-center text-xl gap-2 text-cyan-400'>
-                   Already account?
-                    <Link to="/Login" className=' text-slate-400 underline'>Login</Link>
+                    Already account?
+
+                    <button
+                        className=' underline text-lg'
+                        onClick={toggleLoginVisibility}
+                    >
+                    Login
+                    </button>
+
                 </div>
             </div>
         </div>
