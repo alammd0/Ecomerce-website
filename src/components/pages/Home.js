@@ -9,7 +9,7 @@ import Card from './Card';
 
 const Home = () => {
   return (
-    <div className="w-[1250px] absolute top-[5.25rem] right-0  h-full bg-slate-200">
+    <div className="w-[1250px] absolute top-[5.25rem] right-0 h-fit bg-slate-200">
       <div className='flex justify-between items-center relative'>
 
         <div className="relative px-2 py-2">
@@ -66,16 +66,18 @@ const Home = () => {
       <div className='px-2 py-2'>
         <h2 className="text-2xl font-bold text-slate-700">All Products</h2>
 
-        <div>
+        <div className='flex flex-wrap justify-between'> 
           {
-            cardData.map(card => {
+            cardData.map(card => (
               <Card
                 key={card.id}
                 title={card.title}
-              ></Card>
-            })
+                image={card.image}
+              />
+            ))
           }
         </div>
+
       </div>
 
 
