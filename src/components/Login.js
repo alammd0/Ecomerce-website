@@ -5,7 +5,7 @@ import { AiFillGoogleCircle } from "react-icons/ai";
 import { FaFacebook } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({toggleSignUpVisibility}) => {
+const Login = ({toggleSignUpVisibility, toggleLoginVisibility}) => {
 
   const [formData, setFormData] = useState({
     email: "",
@@ -25,32 +25,12 @@ const Login = ({toggleSignUpVisibility}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let newErrors = {};
-    
-    if (!formData.email) {
-      newErrors.email = 'Email is required';
-    }
-    if (!formData.password) {
-      newErrors.password = 'Password is required';
-    }
-    setErrors(newErrors);
+    console.log('Form submitted');
+    // After form submission, navigate to the home page
+    navigate("/", { replace: true });
+    toggleLoginVisibility();
+};
   
-    if (!newErrors.email && !newErrors.password) {
-      try {
-        // Assuming there's an async login function
-        // await loginFunction(formData);
-  
-        console.log('Form submission');
-        console.log(formData);
-
-        console.log('Navigating to home');
-        navigate("/", { replace: true });
-      } catch (error) {
-        // Handle any errors during the login process
-        console.error("Login failed:", error);
-      }
-    }
-  };
   
 
 
@@ -138,11 +118,7 @@ const Login = ({toggleSignUpVisibility}) => {
             SignUp
           </button>
         </div>
-
-
       </div>
-
-
 
     </div>
   )

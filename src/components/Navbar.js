@@ -5,9 +5,13 @@ import { CiShoppingCart } from "react-icons/ci";
 import Login from "./Login";
 import Signup from "./pages/Signup"; // Assuming you have a SignUp component
 import { useState } from "react";
+// import Cart from "./pages/Cart";
 
 const Navbar = () => {
     const [visibleComponent, setVisibleComponent] = useState(null);
+    // const [cartItems, setCartItems] = useState([]);
+    // const [isCartVisible, setIsCartVisible] = useState(false);
+
 
     const toggleLoginVisibility = () => {
         setVisibleComponent(visibleComponent === 'login' ? null : 'login');
@@ -17,6 +21,21 @@ const Navbar = () => {
         setVisibleComponent(visibleComponent === 'signup' ? null : 'signup');
     };
 
+
+    // const toggleCartVisibility = () => {
+    //     setIsCartVisible(!isCartVisible);
+    // };
+
+    // const addToCart = (item) => {
+    //     setCartItems([...cartItems, item]);
+    // };
+
+    // const removeFromCart = (index) => {
+    //     const updatedCart = cartItems.filter((_, i) => i !== index);
+    //     setCartItems(updatedCart);
+    // };
+
+    
     return (
         <div className='fixed top-0 left-0 w-full bg-slate-100 z-50 flex justify-between  mx-auto py-4 px-10 items-center shadow-md shadow-slate-200'>
             <div>
@@ -71,8 +90,8 @@ const Navbar = () => {
 
                     {visibleComponent === 'login' && (
                         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                        <div className="bg-white p-6 rounded-lg shadow-lg">
-                                <Login toggleSignUpVisibility={toggleSignUpVisibility} />
+                            <div className="bg-white p-6 rounded-lg shadow-lg">
+                                <Login toggleSignUpVisibility={toggleSignUpVisibility} toggleLoginVisibility={toggleLoginVisibility} />
                             </div>
                         </div>
                     )}
@@ -80,15 +99,26 @@ const Navbar = () => {
                     {visibleComponent === 'signup' && (
                         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                             <div className="bg-white p-6 rounded-lg shadow-lg">
-                                <Signup toggleLoginVisibility = {toggleLoginVisibility}/>
+                                <Signup toggleLoginVisibility={toggleLoginVisibility} toggleSignUpVisibility={toggleSignUpVisibility} />
                             </div>
                         </div>
                     )}
                 </div>
 
-                <button className="rounded-full px-1 py-1 hover:bg-gray-400 transition-all duration-300">
-                    <CiShoppingCart className=" text-zinc-900 text-3xl" />
-                </button>
+                <div className="relative">
+                    <button className="rounded-full px-1 py-1 hover:bg-gray-400 transition-all duration-300">
+                        <CiShoppingCart className=" text-zinc-900 text-3xl" />
+                    </button>
+
+                    {/* {isCartVisible && (
+                        <Cart
+                            cartItems={cartItems}
+                            removeFromCart={removeFromCart}
+                            toggleCartVisibility={toggleCartVisibility}
+                        />
+                    )} */}
+                </div>
+
             </div>
         </div>
     );

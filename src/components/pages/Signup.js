@@ -5,7 +5,7 @@ import logo from "../../asset/logo.svg"
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { FaFacebook } from "react-icons/fa6";
 
-const Signup = ({ toggleLoginVisibility }) => {
+const Signup = ({ toggleLoginVisibility , toggleSignUpVisibility}) => {
 
     const [formData, setFormData] = useState({
         firstName: "",
@@ -46,6 +46,9 @@ const Signup = ({ toggleLoginVisibility }) => {
             console.log(formData)
 
             navigate("/")
+
+            toggleSignUpVisibility();
+
         }
     };
 
